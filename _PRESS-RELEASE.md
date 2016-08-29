@@ -17,28 +17,30 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+  > PDF exporter for ESF
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  > Lets accountants batch export invoices to print-ready PDFs
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  > This app allows you to quickly find and export invoices from ESF system to print ready-ready PDFs
 
 ## Problem ##
-  > Describe the problem your product solves.
+  > The official app has no export to PDF functionality. Users can only print invoices one at a time in the browser
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  > A user can login to ESF using his/her certificate, username and password
+  > Search invoices by criteria (date from, date to, etc.)
+  > Download all needed invoices in a .ZIP file
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  > Incredibly conveinient way to get your work done
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  > All you need is to open [domainname].com and login using your existing certificate
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > Now I can do the same work 10 times faster
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > To experience the benefitst of the PDF exporter please visit [domainname].com
