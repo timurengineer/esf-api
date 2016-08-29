@@ -1,10 +1,21 @@
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      loggedIn: false
+    };
   }
   render() {
     return (
-      <div>App</div>
+      <div>
+        {
+          this.state.loggedIn
+            ? <Main />
+            : <Login />
+        }
+      </div>
     );
   }
 }
+
+window.App = App;
