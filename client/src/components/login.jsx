@@ -3,6 +3,7 @@ class Login extends React.Component {
     super(props);
     this.state = {
       username: '',
+      password: '',
       cert: null
     }
   }
@@ -31,7 +32,33 @@ class Login extends React.Component {
     }
   }
   handlePasswordEnter(e) {
-
+    if (e.keyCode === 13) {
+      this.setState({ password: e.target.value }, function(){
+        var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": "/api/users/info",
+          "method": "POST",
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-cache",
+          },
+          "processData": false,
+          "data": JSON.stringify({
+            username: this.state.username,
+            password: this.state.password,
+            data: {
+              tin: this.state.username,
+              x509Certificate: this.state.cert
+            }
+          })
+        }
+        $.ajax(settings).done(function (response) {
+          console.log(response);
+        });
+      });
+      
+    }
   }
   render() {
     return (
