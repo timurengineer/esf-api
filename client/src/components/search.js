@@ -1,4 +1,8 @@
 import React, {Component} from 'react';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import DatePicker from 'material-ui/DatePicker';
+import FlatButton from 'material-ui/FlatButton';
 
 class SearchForm extends Component {
   constructor(props) {
@@ -8,18 +12,31 @@ class SearchForm extends Component {
       asc: true
     };
   }
+  handleSelect(e, i, v) {
+    this.setState({ direction: v});
+  }
   render() {
     return (
       <div>
-        <select value={ this.state.direction } onChange={ (e) => this.setState({ direction: e.target.value }) }>
-          <option value="INBOUND">INBOUND</option>
-          <option value="OUTBOUND">OUTBOUND</option>
-        </select>
-        Date From:
-        <input type="date" onChange={ (e) => this.setState({ dateFrom: (new Date(e.target.value)).toISOString() }) } />
-        Date To:
-        <input type="date" onChange={ (e) => this.setState({ dateTo: (new Date(e.target.value)).toISOString() }) } />
-        <input type="button" value="Search" onClick={ () => this.props.fetchInvoices(this.state) } />
+        <SelectField value={this.state.direction} onChange={this.handleSelect.bind(this)}>
+            <MenuItem value="INBOUND" primaryText="INBOUND" />
+            <MenuItem value="OUTBOUND" primaryText="OUTBOUND" />
+        </SelectField><br />
+        <DatePicker 
+          hintText="Date From" 
+          container="inline" 
+          mode="landscape" 
+          onChange={ (e, d) => this.setState({ dateFrom: (new Date(d)).toISOString() }) }
+        /><br />
+        <DatePicker 
+          hintText="Date To" 
+          container="inline" 
+          mode="landscape" 
+          onChange={ (e, d) => this.setState({ dateTo: (new Date(d)).toISOString() }) }
+        /><br />
+
+        <FlatButton label="Search" onTouchTap={ () => this.props.fetchInvoices(this.state) } />
+
       </div>
     );
   }
