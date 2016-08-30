@@ -36,3 +36,5 @@ bower_components/
 .flooignore
 
 .DS_Store
+
+print/
