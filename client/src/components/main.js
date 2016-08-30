@@ -1,4 +1,8 @@
-class Main extends React.Component {
+import React, {Component} from 'react';
+import SearchForm from './search.js';
+import InvoiceList from './invoicelist.js';
+
+class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -75,4 +79,5 @@ class Main extends React.Component {
   }
 }
 
-window.Main = Main;
+export default Main;
+//window.Main = Main;

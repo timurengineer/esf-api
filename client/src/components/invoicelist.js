@@ -1,4 +1,6 @@
-class InvoiceList extends React.Component {
+import React, {Component} from 'react';
+
+class InvoiceList extends Component {
   constructor(props) {
     super(props);
   }
@@ -14,4 +16,5 @@ class InvoiceList extends React.Component {
   }
 }
 
-window.InvoiceList = InvoiceList;
+//window.InvoiceList = InvoiceList;
+export default InvoiceList;

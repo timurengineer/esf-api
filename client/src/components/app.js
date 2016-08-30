@@ -1,4 +1,8 @@
-class App extends React.Component {
+import React, {Component} from 'react';
+import Main from './main.js';
+import Login from './login.js';
+
+class App extends Component {
   constructor(props) {
     super(props);
     // get sessionId cookie
@@ -34,4 +38,5 @@ class App extends React.Component {
   }
 }
 
-window.App = App;
+export default App;
+//window.App = App;

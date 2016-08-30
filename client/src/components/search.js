@@ -1,4 +1,6 @@
-class SearchForm extends React.Component {
+import React, {Component} from 'react';
+
+class SearchForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,4 +25,5 @@ class SearchForm extends React.Component {
   }
 }
 
-window.SearchForm = SearchForm;
+//window.SearchForm = SearchForm;
+export default SearchForm;
