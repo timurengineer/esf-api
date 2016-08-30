@@ -6,6 +6,9 @@ class InvoiceList extends React.Component {
     return (
       <div>
         <h3>InvoiceList:</h3>
+        <ul>
+          {this.props.invoices.map((item) => (<li key={item.invoiceId}>{item.registrationNumber}</li>))}
+        </ul>
       </div>
     );
   }
