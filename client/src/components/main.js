@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import SearchForm from './search.js';
 import InvoiceList from './invoicelist.js';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class Main extends Component {
   constructor(props) {
@@ -70,7 +71,7 @@ class Main extends Component {
     return (
       <div>
         <h2>Main</h2>
-        <input type="button" value="Sign Out" onClick={ this.logOut.bind(this) } />
+        <RaisedButton label="Sign Out" onTouchTap={ this.logOut.bind(this) } />
         <input type="button" value="PDF" onClick={ this.downloadPdf.bind(this) } />
         <SearchForm fetchInvoices={ this.fetchInvoices.bind(this) }/>
         <InvoiceList invoices={ this.state.invoices }/>

@@ -1,8 +1,29 @@
 import React, {Component} from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import TextField from 'material-ui/TextField';
+
+const styles = {
+  container: {
+    textAlign: 'center'
+  },
+  fileInput: {
+    cursor: 'pointer',
+    position: 'absolute',
+    top: '0',
+    bottom: '0',
+    right: '0',
+    left: '0',
+    width: '100%',
+    opacity: '0'
+  }
+};
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
     this.state = {
       username: '',
       password: '',
@@ -10,6 +31,8 @@ class Login extends Component {
       companyList: [],
       company: ''
     }
+
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleFileLoad(e) {
     var context = this;
@@ -105,31 +128,31 @@ class Login extends Component {
       context.props.toggleSignIn();
     });
   }
+  handleSelect(e, i, v) {
+    this.setState({company: v});
+  }
   render() {
     return (
-      <div>
+      <div style={styles.container}>
         <h2>Sign In</h2>
-        <div>
-          Certificate:
-          <input type="file" onChange={ this.handleFileLoad.bind(this) }/>
-        </div>
-        <div>
-          Username:
-          <input type="text" value={ this.state.username }/>
-        </div>
-        <div>
-          Password:
-          <input type="password" onKeyUp={ this.handlePasswordEnter.bind(this) }/>
-        </div>
-        <div>
-          Company:
-          <select onChange={ (e) => this.setState({company: e.target.value}) } value={this.state.company}>
-            {this.state.companyList.map(function(item) {
-              return (<option key={item.id} value={item.id}>{item.name}</option>)
-            })}
-          </select>
-        </div>
-        <input type="button" value="Sign In" onClick={ this.handleSubmit.bind(this) } />
+        <FlatButton label="Choose file" labelPosition="before">
+          <input type="file" onChange={ this.handleFileLoad.bind(this) } style={styles.fileInput} />
+        </FlatButton><br />
+        <TextField
+          floatingLabelText="Username"
+          value={ this.state.username }
+        /><br />
+        <TextField
+          floatingLabelText="Password"
+          type="password"
+          onKeyUp={ this.handlePasswordEnter.bind(this) }
+        /><br />
+        <SelectField value={this.state.company} onChange={this.handleSelect.bind(this)}>
+          {this.state.companyList.map(function(item) {
+            return (<MenuItem key={item.id} value={item.id} primaryText={item.name} />)
+          })}
+        </SelectField><br />
+        <RaisedButton label="Sign In" onTouchTap={ this.handleSubmit } />
       </div>
     );
   }

@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import Main from './main.js';
 import Login from './login.js';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
     // get sessionId cookie
     var sessionId = null;
     var name = 'sessionId=';
@@ -27,13 +28,13 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
+      <MuiThemeProvider>
         {
           this.state.signedIn
             ? <Main toggleSignIn={ this.toggleSignIn.bind(this) } />
             : <Login toggleSignIn={ this.toggleSignIn.bind(this) } />
         }
-      </div>
+      </MuiThemeProvider>
     );
   }
 }
