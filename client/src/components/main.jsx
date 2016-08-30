@@ -11,13 +11,13 @@ class Main extends React.Component {
     var name = 'sessionId=';
     var ca = document.cookie.split(';');
     for(var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            params.sessionId = c.substring(name.length, c.length);
-        }
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        params.sessionId = c.substring(name.length, c.length);
+      }
     }
     if (!params.sessionId) { this.props.toggleSignIn() }
 
@@ -36,11 +36,34 @@ class Main extends React.Component {
       });
     });
   }
+  downloadPdf() {
+    var queryString = '?sessionId=';
+    var name = 'sessionId=';
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        queryString += c.substring(name.length, c.length);
+      }
+    }
+    
+    for (var i = 0; i < this.state.invoices.length; i++) {
+      queryString += '&idList[]=' + this.state.invoices[i].invoiceId;
+    }
+    $.ajax('/api/pdfs/order' + queryString).done(function(response) {
+      console.log('pdf order ID:', response);
+      window.location = '/api/pdfs/download?orderId=' + response.orderId;
+    });
+  }
   render() {
     return (
       <div>
         <h2>Main</h2>
         <input type="button" value="Sign Out" onClick={ this.props.toggleSignIn } />
+        <input type="button" value="PDF" onClick={ this.downloadPdf.bind(this) } />
         <SearchForm fetchInvoices={ this.fetchInvoices.bind(this) }/>
         <InvoiceList invoices={ this.state.invoices }/>
       </div>
