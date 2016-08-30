@@ -2,7 +2,14 @@ import React, {Component} from 'react';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import DatePicker from 'material-ui/DatePicker';
-import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import {List, ListItem} from 'material-ui/List';
+
+var styles = {
+  searchForm: {
+    margin: '20px'
+  }
+}
 
 class SearchForm extends Component {
   constructor(props) {
@@ -17,7 +24,7 @@ class SearchForm extends Component {
   }
   render() {
     return (
-      <div>
+      <div style={styles.searchForm}>
         <SelectField value={this.state.direction} onChange={this.handleSelect.bind(this)}>
             <MenuItem value="INBOUND" primaryText="INBOUND" />
             <MenuItem value="OUTBOUND" primaryText="OUTBOUND" />
@@ -34,8 +41,7 @@ class SearchForm extends Component {
           mode="landscape" 
           onChange={ (e, d) => this.setState({ dateTo: (new Date(d)).toISOString() }) }
         /><br />
-
-        <FlatButton label="Search" onTouchTap={ () => this.props.fetchInvoices(this.state) } />
+        <RaisedButton label="Search" onTouchTap={ () => this.props.fetchInvoices(this.state) } />
 
       </div>
     );

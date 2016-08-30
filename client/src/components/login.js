@@ -18,6 +18,11 @@ const styles = {
     left: '0',
     width: '100%',
     opacity: '0'
+  },
+  certLink: {
+    position: 'fixed',
+    bottom: '10px',
+    right: '10px'
   }
 };
 
@@ -152,7 +157,8 @@ class Login extends Component {
             return (<MenuItem key={item.id} value={item.id} primaryText={item.name} />)
           })}
         </SelectField><br />
-        <RaisedButton label="Sign In" onTouchTap={ this.handleSubmit } />
+        <RaisedButton label="Sign In" onTouchTap={ this.handleSubmit } /><br />
+        <a style={styles.certLink} href='/customer_auth.pem'>Test Certificate</a>
       </div>
     );
   }

@@ -5,6 +5,14 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
+import LinearProgress from 'material-ui/LinearProgress';
+
+var styles = {
+  progressBar: {
+    backgroundColor: 'white',
+    display: 'none'
+  }
+};
 
 class Main extends Component {
   constructor(props) {
@@ -23,6 +31,7 @@ class Main extends Component {
   fetchInvoices(params) {
     var context = this;
     this.handleClose();
+    styles.progressBar.display = 'block';
     // get sessionId cookie
     var name = 'sessionId=';
     var ca = document.cookie.split(';');
@@ -47,6 +56,7 @@ class Main extends Component {
 
     $.ajax('/api/invoices/query' + queryString).done(function(response) {
       console.log(response);
+      styles.progressBar.display = 'none';
       context.setState({
         invoices: response.invoiceInfoList.invoiceInfo
       });
@@ -84,13 +94,18 @@ class Main extends Component {
         <AppBar
           title="ESF"
           onLeftIconButtonTouchTap={this.handleToggle.bind(this)}
-          iconElementRight={<FlatButton label="Sign Out" onTouchTap={ this.logOut.bind(this) } />}
+          iconElementRight={
+            <span>
+            <FlatButton label="Export to PDF" onTouchTap={ this.downloadPdf.bind(this) } />
+            <FlatButton label="Sign Out" onTouchTap={ this.logOut.bind(this) } />
+            </span>
+          }
         />
-        <h2>Main</h2>
-        <input type="button" value="PDF" onClick={ this.downloadPdf.bind(this) } />
+        <LinearProgress mode="indeterminate" style={styles.progressBar}/>
+        
         <Drawer
           docked={false}
-          width={200}
+          width={300}
           open={this.state.open}
           onRequestChange={(open) => this.setState({open})}
         >
