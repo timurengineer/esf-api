@@ -2,16 +2,19 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: false
+      signedIn: false
     };
+  }
+  toggleSignIn() {
+    this.setState({ signedIn: !this.state.signedIn });
   }
   render() {
     return (
       <div>
         {
-          this.state.loggedIn
+          this.state.signedIn
             ? <Main />
-            : <Login />
+            : <Login toggleSignIn={ this.toggleSignIn.bind(this) } />
         }
       </div>
     );

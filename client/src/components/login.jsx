@@ -5,7 +5,8 @@ class Login extends React.Component {
       username: '',
       password: '',
       cert: null,
-      companyList: []
+      companyList: [],
+      company: ''
     }
   }
   handleFileLoad(e) {
@@ -56,24 +57,51 @@ class Login extends React.Component {
           })
         }
         $.ajax(settings).done(function (response) {
-          console.log(response);
           var results = [];
           for (var i = 0; i < response.user.enterpriseEntries.length; i++) {
             results.push({
-              key: response.user.enterpriseEntries[i].tin,
+              id: response.user.enterpriseEntries[i].tin,
               name: response.user.enterpriseEntries[i].enterpriseTaxpayerInfo.nameRu
             });
           }
+
           context.setState({ companyList: results });
+          context.setState({ company: results[0].id });
         });
       });
-      
     }
+  }
+  handleSubmit() {
+    var context = this;
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "/api/users/session",
+      "method": "POST",
+      "headers": {
+        "content-type": "application/json",
+        "cache-control": "no-cache",
+      },
+      "processData": false,
+      "data": JSON.stringify({
+        username: this.state.username,
+        password: this.state.password,
+        data: {
+          tin: this.state.company,
+          x509Certificate: this.state.cert
+        }
+      })
+    }
+    $.ajax(settings).done(function (response) {
+      console.log(context.props);
+      // TODO: set signedIn state of parent component to true
+      context.props.toggleSignIn();
+    });
   }
   render() {
     return (
       <div>
-        <h2>Login</h2>
+        <h2>Sign In</h2>
         <div>
           Certificate:
           <input type="file" onChange={ this.handleFileLoad.bind(this) }/>
@@ -88,12 +116,13 @@ class Login extends React.Component {
         </div>
         <div>
           Company:
-          <select>
+          <select onChange={ (e) => this.setState({company: e.target.value}) } value={this.state.company}>
             {this.state.companyList.map(function(item) {
-              return (<option value={item.key}>{item.name}</option>)
+              return (<option key={item.id} value={item.id}>{item.name}</option>)
             })}
           </select>
         </div>
+        <input type="button" value="Sign In" onClick={ this.handleSubmit.bind(this) } />
       </div>
     );
   }
