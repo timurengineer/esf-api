@@ -2,7 +2,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      signedIn: false
+      signedIn: true
     };
   }
   toggleSignIn() {
@@ -13,7 +13,7 @@ class App extends React.Component {
       <div>
         {
           this.state.signedIn
-            ? <Main />
+            ? <Main toggleSignIn={ this.toggleSignIn.bind(this) } />
             : <Login toggleSignIn={ this.toggleSignIn.bind(this) } />
         }
       </div>
