@@ -92,9 +92,14 @@ class Login extends React.Component {
         }
       })
     }
-    $.ajax(settings).done(function (response) {
+    $.ajax(settings).done(function(response) {
       console.log(context.props);
-      // TODO: set signedIn state of parent component to true
+      // set sessionId cookie
+      var d = new Date();
+      d.setTime(d.getTime() + (30*60*1000));
+      var expires = "expires="+ d.toUTCString();
+      document.cookie = "sessionId=" + response.sessionId + "; " + expires;
+      // toggle signIn
       context.props.toggleSignIn();
     });
   }

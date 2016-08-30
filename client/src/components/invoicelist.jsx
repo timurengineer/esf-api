@@ -10,3 +10,5 @@ class InvoiceList extends React.Component {
     );
   }
 }
+
+window.InvoiceList = InvoiceList;
