@@ -4,7 +4,8 @@ class Login extends React.Component {
     this.state = {
       username: '',
       password: '',
-      cert: null
+      cert: null,
+      companyList: []
     }
   }
   handleFileLoad(e) {
@@ -32,6 +33,7 @@ class Login extends React.Component {
     }
   }
   handlePasswordEnter(e) {
+    var context = this
     if (e.keyCode === 13) {
       this.setState({ password: e.target.value }, function(){
         var settings = {
@@ -55,6 +57,14 @@ class Login extends React.Component {
         }
         $.ajax(settings).done(function (response) {
           console.log(response);
+          var results = [];
+          for (var i = 0; i < response.user.enterpriseEntries.length; i++) {
+            results.push({
+              key: response.user.enterpriseEntries[i].tin,
+              name: response.user.enterpriseEntries[i].enterpriseTaxpayerInfo.nameRu
+            });
+          }
+          context.setState({ companyList: results });
         });
       });
       
@@ -79,8 +89,9 @@ class Login extends React.Component {
         <div>
           Company:
           <select>
-            <option></option>
-            <option></option>
+            {this.state.companyList.map(function(item) {
+              return (<option value={item.key}>{item.name}</option>)
+            })}
           </select>
         </div>
       </div>
