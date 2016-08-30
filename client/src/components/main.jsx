@@ -58,11 +58,15 @@ class Main extends React.Component {
       window.location = '/api/pdfs/download?orderId=' + response.orderId;
     });
   }
+  logOut() {
+    document.cookie = 'sessionId=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    this.props.toggleSignIn();
+  }
   render() {
     return (
       <div>
         <h2>Main</h2>
-        <input type="button" value="Sign Out" onClick={ this.props.toggleSignIn } />
+        <input type="button" value="Sign Out" onClick={ this.logOut.bind(this) } />
         <input type="button" value="PDF" onClick={ this.downloadPdf.bind(this) } />
         <SearchForm fetchInvoices={ this.fetchInvoices.bind(this) }/>
         <InvoiceList invoices={ this.state.invoices }/>
