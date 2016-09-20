@@ -63,6 +63,7 @@ class Main extends Component {
     });
   }
   downloadPdf() {
+    styles.progressBar.display = 'block';
     var queryString = '?sessionId=';
     var name = 'sessionId=';
     var ca = document.cookie.split(';');
@@ -80,6 +81,7 @@ class Main extends Component {
       queryString += '&idList[]=' + this.state.invoices[i].invoiceId;
     }
     $.ajax('/api/pdfs/order' + queryString).done(function(response) {
+      styles.progressBar.display = 'none';
       console.log('pdf order ID:', response);
       window.location = '/api/pdfs/download?orderId=' + response.orderId;
     });
