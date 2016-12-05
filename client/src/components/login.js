@@ -4,10 +4,15 @@ import FlatButton from 'material-ui/FlatButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
+import Paper from 'material-ui/Paper';
 
 const styles = {
   container: {
-    textAlign: 'center'
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    justifyContent: 'center'
   },
   fileInput: {
     cursor: 'pointer',
@@ -23,6 +28,12 @@ const styles = {
     position: 'fixed',
     bottom: '10px',
     right: '10px'
+  },
+  paperStyle: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '20px',
+    width: '450px'
   }
 };
 
@@ -139,26 +150,33 @@ class Login extends Component {
   render() {
     return (
       <div style={styles.container}>
-        <h2>Sign In</h2>
-        <FlatButton label="Choose file" labelPosition="before">
-          <input type="file" onChange={ this.handleFileLoad.bind(this) } style={styles.fileInput} />
-        </FlatButton><br />
-        <TextField
-          floatingLabelText="Username"
-          value={ this.state.username }
-        /><br />
-        <TextField
-          floatingLabelText="Password"
-          type="password"
-          onKeyUp={ this.handlePasswordEnter.bind(this) }
-        /><br />
-        <SelectField value={this.state.company} onChange={this.handleSelect.bind(this)}>
-          {this.state.companyList.map(function(item) {
-            return (<MenuItem key={item.id} value={item.id} primaryText={item.name} />)
-          })}
-        </SelectField><br />
-        <RaisedButton label="Sign In" onTouchTap={ this.handleSubmit } /><br />
-        <a style={styles.certLink} href='/customer_auth.pem'>Test Certificate</a>
+        <Paper style={styles.paperStyle} zDepth={1}>
+          <FlatButton label="Browse key" labelPosition="before">
+            <input type="file" onChange={ this.handleFileLoad.bind(this) } style={styles.fileInput} />
+          </FlatButton><br />
+          <TextField
+            floatingLabelText="Username"
+            value={ this.state.username }
+            fullWidth
+          /><br />
+          <TextField
+            floatingLabelText="Password"
+            type="password"
+            onKeyUp={ this.handlePasswordEnter.bind(this) }
+            fullWidth
+          /><br />
+          <SelectField 
+            value={this.state.company} 
+            onChange={this.handleSelect.bind(this)}
+            fullWidth
+          >
+            {this.state.companyList.map(function(item) {
+              return (<MenuItem key={item.id} value={item.id} primaryText={item.name} />)
+            })}
+          </SelectField><br />
+          <RaisedButton label="Sign In" onTouchTap={ this.handleSubmit } /><br />
+          <a style={styles.certLink} href='/customer_auth.pem'>Test Certificate</a>
+        </Paper>
       </div>
     );
   }

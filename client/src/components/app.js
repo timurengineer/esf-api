@@ -3,6 +3,13 @@ import Main from './main.js';
 import Login from './login.js';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'row',
+  }
+};
+
 class App extends Component {
   constructor(props, context) {
     super(props, context);
