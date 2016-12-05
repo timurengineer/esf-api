@@ -11,8 +11,14 @@ const styles = {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    height: '100%',
     width: '100%',
     justifyContent: 'center'
+  },
+  loginContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   fileInput: {
     cursor: 'pointer',
@@ -32,6 +38,7 @@ const styles = {
   paperStyle: {
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'stretch',
     padding: '20px',
     width: '450px'
   }
@@ -150,33 +157,36 @@ class Login extends Component {
   render() {
     return (
       <div style={styles.container}>
-        <Paper style={styles.paperStyle} zDepth={1}>
-          <FlatButton label="Browse key" labelPosition="before">
-            <input type="file" onChange={ this.handleFileLoad.bind(this) } style={styles.fileInput} />
-          </FlatButton><br />
-          <TextField
-            floatingLabelText="Username"
-            value={ this.state.username }
-            fullWidth
-          /><br />
-          <TextField
-            floatingLabelText="Password"
-            type="password"
-            onKeyUp={ this.handlePasswordEnter.bind(this) }
-            fullWidth
-          /><br />
-          <SelectField 
-            value={this.state.company} 
-            onChange={this.handleSelect.bind(this)}
-            fullWidth
-          >
-            {this.state.companyList.map(function(item) {
-              return (<MenuItem key={item.id} value={item.id} primaryText={item.name} />)
-            })}
-          </SelectField><br />
-          <RaisedButton label="Sign In" onTouchTap={ this.handleSubmit } /><br />
-          <a style={styles.certLink} href='/customer_auth.pem'>Test Certificate</a>
-        </Paper>
+        <div style={styles.loginContent}>
+          <h3>Select your Key file to get started</h3>
+          <Paper style={styles.paperStyle} zDepth={1}>
+            <FlatButton label="Browse key" labelPosition="before">
+              <input type="file" onChange={ this.handleFileLoad.bind(this) } style={styles.fileInput} />
+            </FlatButton><br />
+            <TextField
+              floatingLabelText="Username"
+              value={ this.state.username }
+              fullWidth
+            /><br />
+            <TextField
+              floatingLabelText="Password"
+              type="password"
+              onKeyUp={ this.handlePasswordEnter.bind(this) }
+              fullWidth
+            /><br />
+            <SelectField 
+              value={this.state.company} 
+              onChange={this.handleSelect.bind(this)}
+              fullWidth
+            >
+              {this.state.companyList.map(function(item) {
+                return (<MenuItem key={item.id} value={item.id} primaryText={item.name} />)
+              })}
+            </SelectField><br />
+            <RaisedButton label="Sign In" onTouchTap={ this.handleSubmit } /><br />
+            <a style={styles.certLink} href='/customer_auth.pem'>Test Certificate</a>
+          </Paper>
+        </div>
       </div>
     );
   }
