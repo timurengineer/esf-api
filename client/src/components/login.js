@@ -10,7 +10,7 @@ const styles = {
   container: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     height: '100%',
     width: '100%',
     justifyContent: 'center'
