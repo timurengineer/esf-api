@@ -1,6 +1,9 @@
 var soap = require('soap');
+var config = require('../config/config');
 
-var wsdl = 'https://92.46.122.150:8443/esf-web/ws/SessionService?wsdl';
+var wsdl = config.env === 'PROD' ? config.soapProd : config.soapTest;
+
+wsdl += '/esf-web/ws/SessionService?wsdl';
 
 var wsdlOptions = {
     overrideRootElement: {
