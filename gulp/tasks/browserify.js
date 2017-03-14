@@ -14,6 +14,8 @@ var handleErrors = require('../util/handleErrors');
 var source       = require('vinyl-source-stream');
 var config       = require('../config').browserify;
 var babelify     = require('babelify');
+var uglify = require('gulp-uglify');
+var buffer = require('vinyl-buffer');
 
 gulp.task('browserify', function(callback) {
 
@@ -44,6 +46,8 @@ gulp.task('browserify', function(callback) {
         // stream gulp compatible. Specify the
         // desired output filename here.
         .pipe(source(bundleConfig.outputName))
+        .pipe(buffer())
+        .pipe(uglify())
         // Specify the output destination
         .pipe(gulp.dest(bundleConfig.dest))
         .on('end', reportFinished);
