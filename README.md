@@ -1,11 +1,15 @@
-#PDF exporter for ESF
-Bulk export ESF invoices to print ready PDF forms
+API server for ESF app
 
-##Setup
-1. Clone this repository
-2. npm install
-3. npm start
+```
+git clone https://github.com/tjkz87/esf-api.git
+cd esf-api
+```
 
-##Usage
-###Prerequisites
-1. ESF Account
+
+```
+npm install
+```
+
+```
+npm start
+```
